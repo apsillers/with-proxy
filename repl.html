@@ -1,0 +1,205 @@
+<html>
+<!-- THIS REPL IS NOT SANDOBXED. INFORMATION MAY PERSIST BETWEEN EXECUTIONS. NOT FOR PRODUCTION USE! -->
+<head>
+<style>
+input:focus{
+    outline: none;
+    font-family: monospace;
+    font-size: 14px;
+}
+html {
+    font-family: monospace;
+    font-size: 14px;
+}
+input {
+    border: none;
+    width: 100%;
+    background: #eee;
+}
+.line-in {
+    font-style: italic;
+    color: #CCC;
+}
+.line-error {
+    color: red;
+}
+.line-log {
+    color: #88F;
+}
+#carret {
+    float: left;
+    background: #eee;
+}
+#input-wrapper {
+    width:auto;
+    overflow:hidden;
+}
+#chunk {
+    height: 300px;
+    margin-bottom: 0;
+    overflow: auto;
+}
+#output {
+    width: 100%;
+    height: 200px;
+    background: #000;
+    color: white;
+    overflow-y: scroll;
+}
+.header a {
+    user-select: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+#run {
+    background: green;
+}
+#save {
+    background: blue;
+    margin-left: 10px;
+}
+#zoom-in {
+    background: #D00;
+    margin-left: 10px;
+}
+#zoom-out {
+    background: #D00;
+    margin-left: 5px;
+}
+.header {
+    margin: 10px 0;
+}
+pre.hljs { margin:0; padding: 5px; }
+</style>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+</head>
+<body>
+<div class="header"><a id="run">Run &gt;&gt;</a><a id="save">Save</a><a id="zoom-in">+🔍</a><a id="zoom-out">-🔍</a></div>
+<pre id="chunk" contenteditable spellcheck=false><code class="js"></code></pre>
+<script>if(window.hljs) { hljs.highlightBlock(chunk); }</script>
+<div id="output"></div>
+<div id="carret">&gt;</div> <div id="input-wrapper"><input type="text" id="input" autocomplete="off"></div>
+
+<script>
+var internalEval;
+var commands = [], historyPos = 0;
+var chunk = document.getElementById("chunk");
+
+/* on load, pull the base64-encoded chunk, highlight it, and run it */
+window.addEventListener("load", function() {
+    chunk.innerText = atob(location.hash.substr(1));
+    if(+location.search.substr(1)) {
+        var size = +location.search.substr(1) + "px";
+        chunk.style.fontSize = size;
+        output.style.fontSize = size;
+        input.style.fontSize = size;
+        carret.style.fontSize = size;
+    }
+    runChunk();
+});
+
+/* display a line in the onscreen console */
+function displayLine(data, className, isLog) {
+    if(!isLog) { data = ultraStringify(data); }
+    var line = document.createElement("div");
+    if(className) { line.className = className; }
+    line.innerText = data;
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
+}
+
+/* overwrite console.log to display to the in-page console */
+console.log = function(...args) {
+    displayLine(args.map(a=>{
+        return ultraStringify(a)
+    }).join(''), 'line-log', true);
+}
+
+function ultraStringify(a) {
+    try {
+        var jsonResult = JSON.stringify(a);
+    } catch(e){}
+    if(jsonResult === undefined) {
+        try { return ""+a; }
+        catch(e) {
+            try { return String(a); }
+            catch(e) { return Object.prototype.toString.call(a); }
+        }
+    }
+    return jsonResult;
+}
+
+/* makes a new closure and executes the code chunk */
+function runChunk() {
+    if(window.hljs) { hljs.highlightBlock(chunk); }
+    output.innerText = "";
+    try {
+        (function() {
+            result = eval("internalEval = function(x) { return eval(x); };undefined;" + chunk.innerText);
+        })();
+        displayLine(result);
+    } catch(e) { displayLine(e.toString(), "line-error"); }
+}
+run.addEventListener("click", runChunk);
+
+/* on Save, base64-encode the chunk and put it in the hash */
+save.addEventListener("click", function() {
+    chunk.innerText = chunk.innerText;
+    if(window.hljs) { hljs.highlightBlock(chunk); }
+    window.location = "#" + btoa(chunk.innerText);
+})
+
+/* on Enter keypress, execute the current input in the current closure */
+input.addEventListener("keypress", function(e) {
+    if(e.which===13) {
+        displayLine("> " + input.value, "line-in", true);
+        try {
+            var result = internalEval(input.value);
+        } catch(e) {
+            displayLine(e.toString(), "line-error");
+            var hasError = true;
+        }
+        commands.push(input.value);
+        historyPos = commands.length;
+        if(!hasError) { displayLine(result); }
+        input.value="";
+    }
+});
+
+/* handle up/down arrow keys for command history */
+input.addEventListener("keyup", function(e) {
+    if(e.which===38) {
+        if(commands[historyPos-1] !== undefined) {
+            input.value = commands[--historyPos];
+        }
+    }
+    
+    if(e.which===40) {
+        if(commands[historyPos+1] !== undefined) {
+            input.value = commands[++historyPos];
+        }
+    }
+});
+
+/* zoom in/out */
+document.getElementById("zoom-in").addEventListener("click", function() {
+    resizeFont(1);
+})
+document.getElementById("zoom-out").addEventListener("click", function() {
+    resizeFont(-1);
+})
+
+function resizeFont(delta) {
+    chunk.style.fontSize = parseInt(getComputedStyle(chunk).fontSize) + delta + "px";
+    output.style.fontSize = parseInt(getComputedStyle(output).fontSize) + delta + "px";
+    input.style.fontSize = parseInt(getComputedStyle(input).fontSize) + delta + "px";
+    carret.style.fontSize = parseInt(getComputedStyle(carret).fontSize) + delta + "px";
+}
+</script>
+</body>
+</html>

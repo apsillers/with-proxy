@@ -1,0 +1,310 @@
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+iframe { border: none; }
+.center {
+    text-align: center;
+}
+.split {
+    float: left;
+    width: 50%;
+}
+.slide {
+  font-size: 25px;
+  font-family: sans-serif;
+}
+li { padding-bottom: 10px; }
+.dim { color: #CCC; }
+</style>
+</head>
+<body>
+
+<div class="slide center">
+<h1>Anything is Possible!</h1>
+<h2>Unlocking the Nightmarish Power of JavaScript via <code>with</code> and <code>Proxy</code></h2>
+</div>
+
+<div class="slide">
+<h1>What's a variable?</h1>
+<ul>
+  <li>A variable is, in language terms, a structure with at least two parts:</li>
+  <ul>
+    <li>A name ("identifier")</li>
+    <li>A value</li>
+    <li>Also, type and memory location, but JavaScript variables don't have those</li>
+  </ul>
+<li>Today, we're going to wreck JavaScript's ability to use variables!</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>A glimpse into our strange, variable-free future</h1>
+<iframe height=600 width=100% src="repl.html?18#bGV0IG5pZ2h0bWFyZSA9IG5ldyBQcm94eSh7fSx7Z2V0OihvLG4pPT54PT54LGhhczp4PT4hMH0pOwoKd2l0aChuaWdodG1hcmUpIHsKIKCgoHVoLW9oOwogoKCgdGhlVHJ1dGggPSBUaGlzICogaXMgKiB2YWxpZCAqIEphdmFTY3JpcHQgKiBub3c7CiCgoKBhcmUoeW91KShzZXJpb3VzKT8gYW5zd2VyOiBZRVM7CiCgoKBvaCwgY3JhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhLS0KfQoKY29uc29sZS5sb2coIlllcywgdGhpcyByZWFsbHkgcnVucyEiKTsKCg==">
+</iframe>
+</div>
+
+
+<div class="slide">
+<h1>JavaScript Objects</h1>
+<div class="split">
+<iframe height=600 width=100% src="repl.html?18#bGV0IGFsaWNlID0gewogICAgYmlydGhkYXk6IG5ldyBEYXRlKCIxOTg4LTA1LTA0IiksCiCgoKBhZ2U6IDMxLAogICAgZmF2b3JpdGVGb29kOiAicGl6emEiCn0=">
+</iframe>
+</div>
+<div class="split">
+<ul>
+  <li>Objects have properties, each made of a key and a value</li>
+  <li>Property access done equivalently by "dot notation" or "bracket notation"</li>
+  <ul>
+    <li><code>alice.age</code></li>
+    <li><code>alice["age"]</code></li>
+  </ul>
+  <li>If a property doesn't exist, it has the value <code>undefined</code></li>
+</ul>
+</div>
+</div>
+
+
+<div class="slide">
+<h1>Getter Properties</h1>
+<div class="split">
+<iframe height=600 width=100% src="repl.html?18#bGV0IGFsaWNlID0gewogICAgYmlydGhkYXk6IG5ldyBEYXRlKCIxOTg4LTA1LTA0IiksCiAgICBnZXQgYWdlKCkgeyByZXR1cm4gbmV3IERhdGUoKSAtIHRoaXMuYmlydGhkYXk7IH0KfQ==">
+</iframe>
+</div>
+<div class="split">
+<ul>
+  <li>Sometimes properties don't have a value, but use a <strong>getter function</strong> to compute their value at access-time</li>
+  <li>Property access is exactly the same:</li>
+  <ul>
+    <li><code>alice.age</code></li>
+    <li><code>alice["age"]</code></li>
+  </ul>
+  <li>But this now causes <strong>transparent function execution</strong></li>
+  <li>The code that asks for alice.age can't tell the difference between a stored value and the getter-generated value</li>
+</ul>
+</div>
+</div>
+
+<div class="slide">
+<h1>Infinite Properties</h1>
+<div class="split">
+<iframe height=600 width=100% src="repl.html?18#CgovKiBXZSBjYW4gZ2V0IEFOWSBwcm9wZXJ0eSBmcm9tIGFsaWNlICovCi8qID8/Pz8/Pz8/Pz8/Pz8gPz8/Pz8gPz8/Pz8/Pz8/Pz8/Pz8gKi8KLyogU2Nyb2xsIGRvd24gZm9yIHRoZSBhbnN3ZXIgKi8KCgoKCgoKCgoKCgoKCgoKCgoKCgpsZXQgYWxpY2UgPSBuZXcgUHJveHkoe30sIHsKICAgIGdldDogKGlubmVyT2JqLCBwcm9wTmFtZSkgPT4gewogICAgICAgIHJldHVybiBwcm9wTmFtZS5sZW5ndGg7CiAgICB9Cn0pOwoKCgoKCgoKCgo=">
+</iframe>
+</div>
+<div class="split">
+<ul>
+  <li>What if we wanted INFINITE properties?</li>
+  <li>How could you even populate infinite propeties with meaningful values?</li>
+  <ul><li>That could take a long time to do manually</li></ul>
+  <li>Maybe some kind of getter for all properties, somehow...?</li>
+</ul>
+</div>
+</div>
+
+
+<div class="slide">
+<h1>Proxy: an object with superpowers</h1>
+<div class="split">
+<iframe height=600 width=100% src="repl.html?25#bGV0IGFsaWNlID0gbmV3IFByb3h5KHt9LCB7CiCgoKAgZ2V0OiAoaW5uZXJPYmosIHByb3BOYW1lKSA9PiB7CiCgoKCgoKCgoKCgoCCgcmV0dXJuIHByb3BOYW1lLmxlbmd0aDsKIKCgoKAgICAgIH0KfSk7">
+</iframe>
+</div>
+<div class="split">
+<ul>
+  <li>A Proxy is a special type of object that allows redefinition of normal JavaScript engine-level behaviors on an object</li>
+  <li>It's called a "proxy" because it wraps around some inner object</li>
+  <br/>
+  <li>Proxies let you define one master getter function for all properties</li>
+  <ul><li>Runs all property access through a "trap" function</li></ul>
+  <li>While traditional getter lets a single property dynamically change value, Proxy's <code>get</code> can dynamically maps any property name onto a value</li>
+</ul>
+</div>
+</div>
+
+<div class="slide">
+<h1>Interesting Proxy: debug-logging all property access</h1>
+<iframe height=600 width=100% src="repl.html?18#ZGJnID0gbmV3IFByb3h5KHt9LCB7CiAgICAgICAgZ2V0Oihpbm5lck9iaiwgcHJvcE5hbWUpID0+IHsKICAgICAgICAgICAgICAgY29uc29sZS5sb2coImFjY2Vzc2luZyAiK3Byb3BOYW1lKTsKICAgICAgICAgICAgICAgcmV0dXJuIGlubmVyT2JqW3Byb3BOYW1lXTsKICAgICAgICB9LAogICAgICAgIHNldDooaW5uZXJPYmosIHByb3BOYW1lLCB2YWx1ZSkgPT4gewogICAgICAgICAgICAgICBjb25zb2xlLmxvZygic3RvcmluZyAiICsgdmFsdWUgKyAiIGluICIgKyBwcm9wTmFtZSk7CiAgICAgICAgICAgICAgIGlubmVyT2JqW3Byb3BOYW1lXSA9IHZhbHVlOwogICAgICAgIH0KICAgICAgfSk7CgpkYmcuaGVsbG8gPSA1OwpkYmcuZ29vZGJ5ZSA9IGRiZy5oZWxsbyAtIDE7">
+</iframe>
+</div>
+
+
+<div class="slide">
+<h1>Interesting Proxy: properties can't start with "s"</h1>
+<iframe height=600 width=100% src="repl.html?18#bm9TID0gbmV3IFByb3h5KHt9LCB7CiCgoKCgoKCgZ2V0Oihpbm5lck9iaiwgcHJvcE5hbWUpID0+IHsKIKCgoKCgoKCgoKCgoKCgaWYocHJvcE5hbWUuc3RhcnRzV2l0aCgicyIpKQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gIkkgZG9uJ3QgbGlrZSBzLXdvcmRzIjsKIKCgoKCgoKCgoKCgoKCgZWxzZQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gaW5uZXJPYmpbcHJvcE5hbWVdOwogoKCgoKCgoKCgoKCgfQogoKCgoKCgoKB9KTsKCm5vUy5mb28gPSA1Owpub1Muc2hvb3QgPSA2Ow==">
+</iframe>
+</div>
+
+<div class="slide">
+<h1>Interesting Proxy: <code>eval</code> all the things</h1>
+<iframe height=600 width=100% src="repl.html?18#ZXZQcm94eSA9IG5ldyBQcm94eSh7fSwgewogoKCgoKCgoKCgoKBnZXQ6IGZ1bmN0aW9uKGlubmVyT2JqLCBwcm9wTmFtZSkgewogoKCgoKCgoKCgoKCgoKCgoKCgcmV0dXJuIGV2YWwocHJvcE5hbWUpOwogoKCgoKCgoKCgoKB9CiCgoKCgoKCgoKB9KTsKLyoKZXZQcm94eS53aW5kb3cKZXZQcm94eVsiMSsxIl0KZXZQcm94eVsiZm9yKGk9MDtpPDM7aSsrKWNvbnNvbGUubG9nKGkpIl0KZXZQcm94eS5ldlByb3h5CmV2UHJveHkuZXZQcm94eS5ldlByb3h5LmV2UHJveHkuZXZQcm94eS5ldlByb3h5LmV2UHJveHkKKi8=">
+</iframe>
+</div>
+
+<div class="slide">
+<h1>The philosophy of a <code>Proxy</code></h1>
+<ul>
+<li>A Proxy object may have infinite meaningful properties</li>
+<li>More strongly, <strong>all</strong> properties on a Proxy may be meaningful!</li>
+<br/>
+<li>From a certain point of view, all possible properties exist at once</li>
+<li>Their values simply aren't computed until asked for: a kind of lazy evaluation in JavaScript!</li>
+</ul>
+</div>
+
+<div class="slide center">
+<h1>Now for something completely different</h1>
+<div>(But remember that <code>Proxy</code> stuff)</div>
+</div>
+
+<div class="slide">
+<h1>JavaScript scope</h1>
+<div class="split">
+<iframe height=600 width=100% src="repl.html?18#bGV0IGp1c3RPbmUgPSAxOwp3aGlsZShqdXN0T25lLS0pIHsKIKCgoGxldCBteVZhcjEgPSAiSSdtIG9ubHkgdmlzaWJsZSBpbiB0aGlzIHdoaWxlIGJsb2NrIjsKIKCgoGxldCBteVZhcjIgPSAiSSdtIGluIHRoaXMgc2NvcGUsIHRvbyI7CiAgICBjb25zb2xlLmxvZyhteVZhcjEpOwp9CmNvbnNvbGUubG9nKG15VmFyMSk7IC8vIEVSUk9SOiBteVZhcjEgb25seSB2aXNpYmxlIGluIHRoZSBibG9jaw==">
+</iframe>
+</div>
+<div class="split">
+<ul>
+<li>This block has two variables inside of it. They are not visible outside the block.</li>
+<br/>
+<li>Each block (like <code>while</code>/<code>for</code>) in JS has a <strong>scope</strong></li>
+<li>What's a scope? A scope holds some <strong>set of variables</strong> (a name + value)</li>
+<li>When you define variables via <code>let</code> (or <code>var</code> or <code>const</code>), you add them to the scope</li>
+</ul>
+</div>
+</div>
+
+<div class="slide">
+<h1>Scope chain</h1>
+<div class="split">
+<iframe height=600 width=100% src="repl.html?16#bGV0IGp1c3RPbmUgPSAxOwp3aGlsZShqdXN0T25lKSB7CiCgoKBsZXQgb3V0ZXJWYXIgPSAiSSdtIG9ubHkgdmlzaWJsZSBpbiB0aGlzIHdoaWxlIGJsb2NrIjsKIKCgoAogoKCgZm9yKDtqdXN0T25lO2p1c3RPbmUtLSkgewogoKCgoKCgbGV0IGlubmVyVmFyID0gIkknbSBvbmx5IHZpc2libGUgaW4gdGhpcyBmb3IgbG9vcCI7CiCgoKCgoKBjb25zb2xlLmxvZyhpbm5lclZhcik7CiAgICAgICBjb25zb2xlLmxvZyhvdXRlclZhcik7CiAgICAgICBjb25zb2xlLmxvZyhqdXN0T25lKTsKIKCgoH0KfQoKCg==">
+</iframe>
+</div>
+<div class="split">
+<ul>
+<li>Scopes are nested in a <strong>scope chain</strong></li>
+<li>From inside the <code>for</code>, we "reach up" the scope chain to the outer scope to find <code>outerVar</code> and <code>justOne</code></li>
+<li>This reach-up lookup happens any time we use a <strong>variable identifier</strong> in any way in our code</li>
+</ul>
+<img src="upscope.png" width=100% alt="Nested blocks with arrows showing reach-up variable access on an outer scope">
+</div>
+</div>
+
+<div class="slide">
+<h1>Let's review</h1>
+<ol>
+<li>A variable is data structure with a name and a value.</li>
+<ul>
+<li>A scope is a set of variables, plus a parent scope</li>
+</ul>
+<li>This parent-child relationship makes up the scope chain.</li>
+<li>Blocks have scopes. <small>(Functions do too. Not important right now.)</small></li>
+<li>We create a variable in a scope via variable definitions like <code>let foo</code></li>
+<li>When our code uses any variable identifier, the JS engine tries to find some a matching-named variable somewhere in the scope chain</li>
+</ol>
+</div>
+
+<div class="slide">
+<h1>Let's review</h1>
+<ol>
+<li class="dim">A variable is data structure with a name and a value.</li>
+<ul>
+<li class="dim">A scope is a set of variables, plus a parent scope</li>
+</ul>
+<li class="dim">This parent-child relationship makes up the scope chain.</li>
+<li class="dim">Blocks have scopes. <small>(Functions do too. Not important right now.)</small></li>
+<li><strong>We create a variable in a scope via variable definitions like <code>let foo</code></strong></li>
+<li class="dim">When our code uses any variable identifier, the JS engine tries to find some a matching-named variable somewhere in the scope chain</li>
+</ol>
+</div>
+
+<div class="slide center">
+<img src="whatif.jpg" alt="What if I told you... that's not the only way to make variables">
+</div>
+
+<div class="slide">
+<h1>Defining variables <code>with</code> style</h1>
+<div class="split">
+<iframe height=600 width=100% src="repl.html?20#Y29uc29sZS5sb2coCiAgTWF0aC5tYXgoTWF0aC5zcXJ0KDIpLCBNYXRoLnRhbihNYXRoLlBJKSkKKQoKd2l0aChNYXRoKSB7CiAgbWF4KHNxcnQoMiksIHRhbihQSSkpCn0KCg==">
+</iframe>
+</div>
+<div class="split">
+<ul>
+<li>The <code>with</code> statement is so awful, it's disallowed in JS strict mode</li>
+<li>A <code>with</code> block has an immediate outer variable scope defined by the <strong>properties of an object</strong></li>
+<li>This introduces variables not defined by <code>let</code> or <code>var</code></li>
+<br/>
+<li>In the second code snippet here, there are the variable identifiers (<code>max</code>, <code>sqrt</code>, etc.) that we never defined anywhere
+<li>The reach-up variable lookup first looks at the properties of the <code>Math</code> object to find variables with those names</li>
+</ul>
+<img src="withscope.png">
+</div>
+</div>
+
+<div class="slide">
+<h1>So that means...</h1>
+<ul>
+<li>Any variable identifier can potentially be resolved by object-property access</li>
+<li>Wait, don't I know about an object with infinite, lazily-evaluated properties…?</li>
+<li>Oh yeah, a </code>Proxy</code></li>
+<ul>
+<li>I was paying attention earlier</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>So THAT means...</h1>
+<div class="split">
+<iframe height=600 width=100% src="repl.html?18#bGV0IG5pZ2h0bWFyZSA9IG5ldyBQcm94eSh7fSx7CiAgICBnZXQ6KG8sbik9Png9PngsICAvKiBhbGwgcHJvcGVydGllcyB5aWVsZCB4PT54LCBpZGVudGl0eSBmdW5jdGlvbiAqLwogICAgaGFzOmE9PnRydWUgICAgICAgLyogd2hlbiBhc2tlZCwgdGhlIFByb3h5IGNsYWltcyBpdCBoYXMgYW55IHByb3BlcnR5ICovCn0pOwoKd2l0aChuaWdodG1hcmUpIHsKIKCgoHVoLW9oOwogoKCgdGhlVHJ1dGggPSBUaGlzICogaXMgKiB2YWxpZCAqIEphdmFTY3JpcHQgKiBub3c7CiCgoKBhcmUoeW91KShzZXJpb3VzKT8gYW5zd2VyOiBZRVM7CiCgoKBvaCwgY3JhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhLS0KfQoKY29uc29sZS5sb2coIlllcywgdGhpcyByZWFsbHkgcnVucyEiKTs=">
+</iframe>
+</div>
+<div class="split">
+<ul>
+<li>ALL VARIABLES EXIST AT ONCE</li>
+<li>Welcome to a world where all variable identifiers resolve to the identity function (i.e., a function that returns its input)</li>
+<li>This is because all variable lookups find a result in the Proxy, which claims it has any variable, and always produces an identity function</li>
+</ul>
+</div>
+</div>
+
+<div class="slide">
+<h1>Applications: binary literal</h1>
+<div class="split">
+<iframe height=600 width=100% src="repl.html?16#bGV0IGJpbmFyeUxpdGVyYWwgPSBuZXcgUHJveHkoe30sIHsKICAgIGdldDogKG9iaiwgbmFtZSkgPT4gewogICAgICAgIGlmKG5hbWUubGVuZ3RoICYmIG5hbWUubWF0Y2goL15iWzAxXSskLykpIHsKICAgICAgICAgICAgcmV0dXJuIHBhcnNlSW50KG5hbWUuc3Vic3RyKDEpLCAyKQogICAgICAgIH0gZWxzZSB7IHJldHVybiBldmFsKG5hbWUpOyB9CiAgICB9LAogICAgaGFzOiAob2JqLCBuYW1lKT0+KG5hbWUubGVuZ3RoICYmICEhL15iWzAxXSskLy5leGVjKG5hbWUpKQp9KQoKd2l0aChiaW5hcnlMaXRlcmFsKSB7CiAgICBjb25zb2xlLmxvZyhiMTAwMSArIGIwMTEwKTsKICAgIGNvbnNvbGUubG9nKGIxMTAwMTEwMCAmIGIwMDAwMTExMSk7CiAgICBjb25zb2xlLmxvZyhiMTExMTExIF4gYjEwMTAxMCk7Cn0=">
+</iframe>
+</div>
+<div class="split">
+<ul>
+  <li>We could make a binary literal of the form <code>b[01]+</code></li>
+</ul>
+</div>
+</div>
+
+<div class="slide">
+<h1>Applications: variables with strict types!!</h1>
+<iframe height=600 width=100% src="repl.html?16#bGV0IHR5cGVzID0gbmV3IFByb3h5KE9iamVjdC5jcmVhdGUobnVsbCksewogIHNldDogKG8sbix2KT0+ewogICAgbGV0IFtfLHR5cGUsbmFtZV0gPSBuLm1hdGNoKC8oW14kXSspXCRcJCguKykkLykgfHwgW107CiAgICBpZighKG5hbWUgaW4gbykpIHsgb1tuYW1lXSA9IHsgdHlwZTp0eXBlIH07IH0KICAgIGVsc2UgaWYob1tuYW1lXS50eXBlICE9PSB0eXBlKSB7IHRocm93IG5ldyBFcnJvcihgJHtuYW1lfSBjYW5ub3QgYmUgZ2l2ZW4gdHlwZSAke3R5cGV9OyBhbHJlYWR5IGRlZmluZWQgd2l0aCB0eXBlICR7b1tuYW1lXS50eXBlfWApIH0KICAgIG5hbWUgPSBuYW1lIHx8IG47CiAgICBpZih0eXBlb2YgdiA9PSBvW25hbWVdLnR5cGUpIHsgb1tuYW1lXS52YWx1ZSA9IHY7IH0KICAgIGVsc2UgeyB0aHJvdyBuZXcgRXJyb3IoYEV4cGVjdGVkIHR5cGUgJHtvW25hbWVdLnR5cGV9IGZvciAke25hbWV9OyByZWNlaXZlZCAke3R5cGVvZiB2fSBpbnN0ZWFkLmApOyB9CiAgfSwKICBnZXQ6IChvLG4pPT57IHJldHVybiBvW25dICYmIG9bbl0udmFsdWUgfSwKICBoYXM6IChvLG4pPT4obi5tYXRjaCgvKFteJF0rKVwkXCQoLispJC8pIHx8IG4gaW4gbykKfSk7Cgp3aXRoKHR5cGVzKSB7CiCgoKBudW1iZXIkJGkgPSAwOwogICAgd2hpbGUoaSA8IDUpIHsgY29uc29sZS5sb2coaSsrKTsgfQogICAgc3RyaW5nJCRuYW1lID0gImhlbGxvIjsKICAgIG5hbWUgPSA3Owp9Cgo=">
+</iframe>
+</div>
+
+<script>
+var slideIndex = +location.hash.substr(1) || 0;
+[...document.querySelectorAll(".slide")].forEach(s=>s.style.display="none");
+document.querySelector(".slide").style.display = "block";
+
+window.addEventListener("hashchange", function() { pageTo(+location.hash.substr(1) || slideIndex) });
+
+document.body.addEventListener("click", function(e) {
+    if(e.which == 1) { pageTo(slideIndex+1); }
+});
+
+document.body.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+    pageTo(slideIndex-1);
+});
+
+function pageTo(targetIndex) {
+    slideIndex = targetIndex;
+    [...document.querySelectorAll(".slide")].forEach((s,idx)=>s.style.display=(idx==targetIndex?"block":"none"));
+}
+
+pageTo(slideIndex);
+</script>
+</html>
