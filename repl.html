@@ -1,5 +1,16 @@
 <html>
-<!-- THIS REPL IS NOT SANDOBXED. INFORMATION MAY PERSIST BETWEEN EXECUTIONS. NOT FOR PRODUCTION USE! -->
+<!--
+THIS REPL IS NOT SANDOBXED. INFORMATION MAY PERSIST BETWEEN EXECUTIONS. NOT FOR PRODUCTION USE!
+
+Too-Simple REPL
+Copyright 2019 Andrew Sillers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
 <head>
 <style>
 input:focus{
@@ -61,6 +72,10 @@ input {
     background: blue;
     margin-left: 10px;
 }
+#about {
+    background: purple;
+    margin-left: 10px;
+}
 #zoom-in {
     background: #D00;
     margin-left: 10px;
@@ -79,7 +94,7 @@ pre.hljs { margin:0; padding: 5px; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
 </head>
 <body>
-<div class="header"><a id="run">Run &gt;&gt;</a><a id="save">Save</a><a id="zoom-in">+🔍</a><a id="zoom-out">-🔍</a></div>
+<div class="header"><a id="run">Run &gt;&gt;</a><a id="save">Save</a><a id="zoom-in">+🔍</a><a id="zoom-out">-🔍</a><a id="about">About</a></div>
 <pre id="chunk" contenteditable spellcheck=false><code class="js"></code></pre>
 <script>if(window.hljs) { hljs.highlightBlock(chunk); }</script>
 <div id="output"></div>
@@ -151,8 +166,22 @@ run.addEventListener("click", runChunk);
 save.addEventListener("click", function() {
     chunk.innerText = chunk.innerText;
     if(window.hljs) { hljs.highlightBlock(chunk); }
+    if(window.top != window) {
+        prompt("Hash data:", "#" + btoa(chunk.innerText));
+    }
     window.location = "#" + btoa(chunk.innerText);
-})
+});
+
+about.addEventListener("click", function() {
+    alert(`Too-Simple REPL
+Copyright 2019 Andrew Sillers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.`);
+});
 
 /* on Enter keypress, execute the current input in the current closure */
 input.addEventListener("keypress", function(e) {

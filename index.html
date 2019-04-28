@@ -1,3 +1,6 @@
+<!--
+
+-->
 <html>
 <head>
 <meta charset="utf-8">
@@ -16,6 +19,11 @@ iframe { border: none; }
 }
 li { padding-bottom: 10px; }
 .dim { color: #CCC; }
+h1 { margin-bottom: 2px; }
+iframe {
+    height: 590px;
+    width: 100%;
+}
 </style>
 </head>
 <body>
@@ -23,6 +31,10 @@ li { padding-bottom: 10px; }
 <div class="slide center">
 <h1>Anything is Possible!</h1>
 <h2>Unlocking the Nightmarish Power of JavaScript via <code>with</code> and <code>Proxy</code></h2>
+<br/>
+<h3>Andrew Sillers</h3>
+<br/>
+<small>Click/tap to continue; right-click or long-press to go back</small>
 </div>
 
 <div class="slide">
@@ -40,7 +52,7 @@ li { padding-bottom: 10px; }
 
 <div class="slide">
 <h1>A glimpse into our strange, variable-free future</h1>
-<iframe height=600 width=100% src="repl.html?18#bGV0IG5pZ2h0bWFyZSA9IG5ldyBQcm94eSh7fSx7Z2V0OihvLG4pPT54PT54LGhhczp4PT4hMH0pOwoKd2l0aChuaWdodG1hcmUpIHsKIKCgoHVoLW9oOwogoKCgdGhlVHJ1dGggPSBUaGlzICogaXMgKiB2YWxpZCAqIEphdmFTY3JpcHQgKiBub3c7CiCgoKBhcmUoeW91KShzZXJpb3VzKT8gYW5zd2VyOiBZRVM7CiCgoKBvaCwgY3JhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhLS0KfQoKY29uc29sZS5sb2coIlllcywgdGhpcyByZWFsbHkgcnVucyEiKTsKCg==">
+<iframe src="repl.html?18#bGV0IG5pZ2h0bWFyZSA9IG5ldyBQcm94eSh7fSx7Z2V0OihvLG4pPT54PT54LGhhczp4PT4hMH0pOwoKd2l0aChuaWdodG1hcmUpIHsKIKCgoHVoLW9oOwogoKCgdGhlVHJ1dGggPSBUaGlzICogaXMgKiB2YWxpZCAqIEphdmFTY3JpcHQgKiBub3c7CiCgoKBhcmUoeW91KShzZXJpb3VzKT8gYW5zd2VyOiBZRVM7CiCgoKBvaCwgY3JhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhLS0KfQoKY29uc29sZS5sb2coIlllcywgdGhpcyByZWFsbHkgcnVucyEiKTsKCg==">
 </iframe>
 </div>
 
@@ -48,7 +60,7 @@ li { padding-bottom: 10px; }
 <div class="slide">
 <h1>JavaScript Objects</h1>
 <div class="split">
-<iframe height=600 width=100% src="repl.html?18#bGV0IGFsaWNlID0gewogICAgYmlydGhkYXk6IG5ldyBEYXRlKCIxOTg4LTA1LTA0IiksCiCgoKBhZ2U6IDMxLAogICAgZmF2b3JpdGVGb29kOiAicGl6emEiCn0=">
+<iframe src="repl.html?18#bGV0IGFsaWNlID0gewogICAgYmlydGhkYXk6IG5ldyBEYXRlKCIxOTg4LTA1LTA0IiksCiCgoKBhZ2U6IDMxLAogICAgZmF2b3JpdGVGb29kOiAicGl6emEiCn0=">
 </iframe>
 </div>
 <div class="split">
@@ -68,7 +80,7 @@ li { padding-bottom: 10px; }
 <div class="slide">
 <h1>Getter Properties</h1>
 <div class="split">
-<iframe height=600 width=100% src="repl.html?18#bGV0IGFsaWNlID0gewogICAgYmlydGhkYXk6IG5ldyBEYXRlKCIxOTg4LTA1LTA0IiksCiAgICBnZXQgYWdlKCkgeyByZXR1cm4gbmV3IERhdGUoKSAtIHRoaXMuYmlydGhkYXk7IH0KfQ==">
+<iframe src="repl.html?18#bGV0IGFsaWNlID0gewogICAgYmlydGhkYXk6IG5ldyBEYXRlKCIxOTg4LTA1LTA0IiksCiAgICBnZXQgYWdlKCkgeyByZXR1cm4gbmV3IERhdGUoKSAtIHRoaXMuYmlydGhkYXk7IH0KfQ==">
 </iframe>
 </div>
 <div class="split">
@@ -88,7 +100,7 @@ li { padding-bottom: 10px; }
 <div class="slide">
 <h1>Infinite Properties</h1>
 <div class="split">
-<iframe height=600 width=100% src="repl.html?18#CgovKiBXZSBjYW4gZ2V0IEFOWSBwcm9wZXJ0eSBmcm9tIGFsaWNlICovCi8qID8/Pz8/Pz8/Pz8/Pz8gPz8/Pz8gPz8/Pz8/Pz8/Pz8/Pz8gKi8KLyogU2Nyb2xsIGRvd24gZm9yIHRoZSBhbnN3ZXIgKi8KCgoKCgoKCgoKCgoKCgoKCgoKCgpsZXQgYWxpY2UgPSBuZXcgUHJveHkoe30sIHsKICAgIGdldDogKGlubmVyT2JqLCBwcm9wTmFtZSkgPT4gewogICAgICAgIHJldHVybiBwcm9wTmFtZS5sZW5ndGg7CiAgICB9Cn0pOwoKCgoKCgoKCgo=">
+<iframe src="repl.html?18#CgovKiBXZSBjYW4gZ2V0IEFOWSBwcm9wZXJ0eSBmcm9tIGFsaWNlICovCi8qID8/Pz8/Pz8/Pz8/Pz8gPz8/Pz8gPz8/Pz8/Pz8/Pz8/Pz8gKi8KLyogU2Nyb2xsIGRvd24gZm9yIHRoZSBhbnN3ZXIgKi8KCgoKCgoKCgoKCgoKCgoKCgoKCgpsZXQgYWxpY2UgPSBuZXcgUHJveHkoe30sIHsKICAgIGdldDogKGlubmVyT2JqLCBwcm9wTmFtZSkgPT4gewogICAgICAgIHJldHVybiBwcm9wTmFtZS5sZW5ndGg7CiAgICB9Cn0pOwoKCgoKCgoKCgo=">
 </iframe>
 </div>
 <div class="split">
@@ -105,7 +117,7 @@ li { padding-bottom: 10px; }
 <div class="slide">
 <h1>Proxy: an object with superpowers</h1>
 <div class="split">
-<iframe height=600 width=100% src="repl.html?25#bGV0IGFsaWNlID0gbmV3IFByb3h5KHt9LCB7CiCgoKAgZ2V0OiAoaW5uZXJPYmosIHByb3BOYW1lKSA9PiB7CiCgoKCgoKCgoKCgoCCgcmV0dXJuIHByb3BOYW1lLmxlbmd0aDsKIKCgoKAgICAgIH0KfSk7">
+<iframe src="repl.html?25#bGV0IGFsaWNlID0gbmV3IFByb3h5KHt9LCB7CiCgoKAgZ2V0OiAoaW5uZXJPYmosIHByb3BOYW1lKSA9PiB7CiCgoKCgoKCgoKCgoCCgcmV0dXJuIHByb3BOYW1lLmxlbmd0aDsKIKCgoKAgICAgIH0KfSk7">
 </iframe>
 </div>
 <div class="split">
@@ -122,20 +134,20 @@ li { padding-bottom: 10px; }
 
 <div class="slide">
 <h1>Interesting Proxy: debug-logging all property access</h1>
-<iframe height=600 width=100% src="repl.html?18#ZGJnID0gbmV3IFByb3h5KHt9LCB7CiAgICAgICAgZ2V0Oihpbm5lck9iaiwgcHJvcE5hbWUpID0+IHsKICAgICAgICAgICAgICAgY29uc29sZS5sb2coImFjY2Vzc2luZyAiK3Byb3BOYW1lKTsKICAgICAgICAgICAgICAgcmV0dXJuIGlubmVyT2JqW3Byb3BOYW1lXTsKICAgICAgICB9LAogICAgICAgIHNldDooaW5uZXJPYmosIHByb3BOYW1lLCB2YWx1ZSkgPT4gewogICAgICAgICAgICAgICBjb25zb2xlLmxvZygic3RvcmluZyAiICsgdmFsdWUgKyAiIGluICIgKyBwcm9wTmFtZSk7CiAgICAgICAgICAgICAgIGlubmVyT2JqW3Byb3BOYW1lXSA9IHZhbHVlOwogICAgICAgIH0KICAgICAgfSk7CgpkYmcuaGVsbG8gPSA1OwpkYmcuZ29vZGJ5ZSA9IGRiZy5oZWxsbyAtIDE7">
+<iframe src="repl.html?18#ZGJnID0gbmV3IFByb3h5KHt9LCB7CiAgICAgICAgZ2V0Oihpbm5lck9iaiwgcHJvcE5hbWUpID0+IHsKICAgICAgICAgICAgICAgY29uc29sZS5sb2coImFjY2Vzc2luZyAiK3Byb3BOYW1lKTsKICAgICAgICAgICAgICAgcmV0dXJuIGlubmVyT2JqW3Byb3BOYW1lXTsKICAgICAgICB9LAogICAgICAgIHNldDooaW5uZXJPYmosIHByb3BOYW1lLCB2YWx1ZSkgPT4gewogICAgICAgICAgICAgICBjb25zb2xlLmxvZygic3RvcmluZyAiICsgdmFsdWUgKyAiIGluICIgKyBwcm9wTmFtZSk7CiAgICAgICAgICAgICAgIGlubmVyT2JqW3Byb3BOYW1lXSA9IHZhbHVlOwogICAgICAgIH0KICAgICAgfSk7CgpkYmcuaGVsbG8gPSA1OwpkYmcuZ29vZGJ5ZSA9IGRiZy5oZWxsbyAtIDE7">
 </iframe>
 </div>
 
 
 <div class="slide">
 <h1>Interesting Proxy: properties can't start with "s"</h1>
-<iframe height=600 width=100% src="repl.html?18#bm9TID0gbmV3IFByb3h5KHt9LCB7CiCgoKCgoKCgZ2V0Oihpbm5lck9iaiwgcHJvcE5hbWUpID0+IHsKIKCgoKCgoKCgoKCgoKCgaWYocHJvcE5hbWUuc3RhcnRzV2l0aCgicyIpKQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gIkkgZG9uJ3QgbGlrZSBzLXdvcmRzIjsKIKCgoKCgoKCgoKCgoKCgZWxzZQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gaW5uZXJPYmpbcHJvcE5hbWVdOwogoKCgoKCgoKCgoKCgfQogoKCgoKCgoKB9KTsKCm5vUy5mb28gPSA1Owpub1Muc2hvb3QgPSA2Ow==">
+<iframe src="repl.html?18#bm9TID0gbmV3IFByb3h5KHt9LCB7CiCgoKCgoKCgZ2V0Oihpbm5lck9iaiwgcHJvcE5hbWUpID0+IHsKIKCgoKCgoKCgoKCgoKCgaWYocHJvcE5hbWUuc3RhcnRzV2l0aCgicyIpKQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gIkkgZG9uJ3QgbGlrZSBzLXdvcmRzIjsKIKCgoKCgoKCgoKCgoKCgZWxzZQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gaW5uZXJPYmpbcHJvcE5hbWVdOwogoKCgoKCgoKCgoKCgfQogoKCgoKCgoKB9KTsKCm5vUy5mb28gPSA1Owpub1Muc2hvb3QgPSA2Ow==">
 </iframe>
 </div>
 
 <div class="slide">
 <h1>Interesting Proxy: <code>eval</code> all the things</h1>
-<iframe height=600 width=100% src="repl.html?18#ZXZQcm94eSA9IG5ldyBQcm94eSh7fSwgewogoKCgoKCgoKCgoKBnZXQ6IGZ1bmN0aW9uKGlubmVyT2JqLCBwcm9wTmFtZSkgewogoKCgoKCgoKCgoKCgoKCgoKCgcmV0dXJuIGV2YWwocHJvcE5hbWUpOwogoKCgoKCgoKCgoKB9CiCgoKCgoKCgoKB9KTsKLyoKZXZQcm94eS53aW5kb3cKZXZQcm94eVsiMSsxIl0KZXZQcm94eVsiZm9yKGk9MDtpPDM7aSsrKWNvbnNvbGUubG9nKGkpIl0KZXZQcm94eS5ldlByb3h5CmV2UHJveHkuZXZQcm94eS5ldlByb3h5LmV2UHJveHkuZXZQcm94eS5ldlByb3h5LmV2UHJveHkKKi8=">
+<iframe src="repl.html?18#ZXZQcm94eSA9IG5ldyBQcm94eSh7fSwgewogoKCgoKCgoKCgoKBnZXQ6IGZ1bmN0aW9uKGlubmVyT2JqLCBwcm9wTmFtZSkgewogoKCgoKCgoKCgoKCgoKCgoKCgcmV0dXJuIGV2YWwocHJvcE5hbWUpOwogoKCgoKCgoKCgoKB9CiCgoKCgoKCgoKB9KTsKLyoKZXZQcm94eS53aW5kb3cKZXZQcm94eVsiMSsxIl0KZXZQcm94eVsiZm9yKGk9MDtpPDM7aSsrKWNvbnNvbGUubG9nKGkpIl0KZXZQcm94eS5ldlByb3h5CmV2UHJveHkuZXZQcm94eS5ldlByb3h5LmV2UHJveHkuZXZQcm94eS5ldlByb3h5LmV2UHJveHkKKi8=">
 </iframe>
 </div>
 
@@ -158,7 +170,7 @@ li { padding-bottom: 10px; }
 <div class="slide">
 <h1>JavaScript scope</h1>
 <div class="split">
-<iframe height=600 width=100% src="repl.html?18#bGV0IGp1c3RPbmUgPSAxOwp3aGlsZShqdXN0T25lLS0pIHsKIKCgoGxldCBteVZhcjEgPSAiSSdtIG9ubHkgdmlzaWJsZSBpbiB0aGlzIHdoaWxlIGJsb2NrIjsKIKCgoGxldCBteVZhcjIgPSAiSSdtIGluIHRoaXMgc2NvcGUsIHRvbyI7CiAgICBjb25zb2xlLmxvZyhteVZhcjEpOwp9CmNvbnNvbGUubG9nKG15VmFyMSk7IC8vIEVSUk9SOiBteVZhcjEgb25seSB2aXNpYmxlIGluIHRoZSBibG9jaw==">
+<iframe src="repl.html?18#bGV0IGp1c3RPbmUgPSAxOwp3aGlsZShqdXN0T25lLS0pIHsKIKCgoGxldCBteVZhcjEgPSAiSSdtIG9ubHkgdmlzaWJsZSBpbiB0aGlzIHdoaWxlIGJsb2NrIjsKIKCgoGxldCBteVZhcjIgPSAiSSdtIGluIHRoaXMgc2NvcGUsIHRvbyI7CiAgICBjb25zb2xlLmxvZyhteVZhcjEpOwp9CmNvbnNvbGUubG9nKG15VmFyMSk7IC8vIEVSUk9SOiBteVZhcjEgb25seSB2aXNpYmxlIGluIHRoZSBibG9jaw==">
 </iframe>
 </div>
 <div class="split">
@@ -175,7 +187,7 @@ li { padding-bottom: 10px; }
 <div class="slide">
 <h1>Scope chain</h1>
 <div class="split">
-<iframe height=600 width=100% src="repl.html?16#bGV0IGp1c3RPbmUgPSAxOwp3aGlsZShqdXN0T25lKSB7CiCgoKBsZXQgb3V0ZXJWYXIgPSAiSSdtIG9ubHkgdmlzaWJsZSBpbiB0aGlzIHdoaWxlIGJsb2NrIjsKIKCgoAogoKCgZm9yKDtqdXN0T25lO2p1c3RPbmUtLSkgewogoKCgoKCgbGV0IGlubmVyVmFyID0gIkknbSBvbmx5IHZpc2libGUgaW4gdGhpcyBmb3IgbG9vcCI7CiCgoKCgoKBjb25zb2xlLmxvZyhpbm5lclZhcik7CiAgICAgICBjb25zb2xlLmxvZyhvdXRlclZhcik7CiAgICAgICBjb25zb2xlLmxvZyhqdXN0T25lKTsKIKCgoH0KfQoKCg==">
+<iframe src="repl.html?16#bGV0IGp1c3RPbmUgPSAxOwp3aGlsZShqdXN0T25lKSB7CiCgoKBsZXQgb3V0ZXJWYXIgPSAiSSdtIG9ubHkgdmlzaWJsZSBpbiB0aGlzIHdoaWxlIGJsb2NrIjsKIKCgoAogoKCgZm9yKDtqdXN0T25lO2p1c3RPbmUtLSkgewogoKCgoKCgbGV0IGlubmVyVmFyID0gIkknbSBvbmx5IHZpc2libGUgaW4gdGhpcyBmb3IgbG9vcCI7CiCgoKCgoKBjb25zb2xlLmxvZyhpbm5lclZhcik7CiAgICAgICBjb25zb2xlLmxvZyhvdXRlclZhcik7CiAgICAgICBjb25zb2xlLmxvZyhqdXN0T25lKTsKIKCgoH0KfQoKCg==">
 </iframe>
 </div>
 <div class="split">
@@ -223,7 +235,7 @@ li { padding-bottom: 10px; }
 <div class="slide">
 <h1>Defining variables <code>with</code> style</h1>
 <div class="split">
-<iframe height=600 width=100% src="repl.html?20#Y29uc29sZS5sb2coCiAgTWF0aC5tYXgoTWF0aC5zcXJ0KDIpLCBNYXRoLnRhbihNYXRoLlBJKSkKKQoKd2l0aChNYXRoKSB7CiAgbWF4KHNxcnQoMiksIHRhbihQSSkpCn0KCg==">
+<iframe src="repl.html?20#Y29uc29sZS5sb2coCiAgTWF0aC5tYXgoTWF0aC5zcXJ0KDIpLCBNYXRoLnRhbihNYXRoLlBJKSkKKQoKd2l0aChNYXRoKSB7CiAgbWF4KHNxcnQoMiksIHRhbihQSSkpCn0KCg==">
 </iframe>
 </div>
 <div class="split">
@@ -253,7 +265,7 @@ li { padding-bottom: 10px; }
 <div class="slide">
 <h1>So THAT means...</h1>
 <div class="split">
-<iframe height=600 width=100% src="repl.html?18#bGV0IG5pZ2h0bWFyZSA9IG5ldyBQcm94eSh7fSx7CiAgICBnZXQ6KG8sbik9Png9PngsICAvKiBhbGwgcHJvcGVydGllcyB5aWVsZCB4PT54LCBpZGVudGl0eSBmdW5jdGlvbiAqLwogICAgaGFzOmE9PnRydWUgICAgICAgLyogd2hlbiBhc2tlZCwgdGhlIFByb3h5IGNsYWltcyBpdCBoYXMgYW55IHByb3BlcnR5ICovCn0pOwoKd2l0aChuaWdodG1hcmUpIHsKIKCgoHVoLW9oOwogoKCgdGhlVHJ1dGggPSBUaGlzICogaXMgKiB2YWxpZCAqIEphdmFTY3JpcHQgKiBub3c7CiCgoKBhcmUoeW91KShzZXJpb3VzKT8gYW5zd2VyOiBZRVM7CiCgoKBvaCwgY3JhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhLS0KfQoKY29uc29sZS5sb2coIlllcywgdGhpcyByZWFsbHkgcnVucyEiKTs=">
+<iframe src="repl.html?18#bGV0IG5pZ2h0bWFyZSA9IG5ldyBQcm94eSh7fSx7CiAgICBnZXQ6KG8sbik9Png9PngsICAvKiBhbGwgcHJvcGVydGllcyB5aWVsZCB4PT54LCBpZGVudGl0eSBmdW5jdGlvbiAqLwogICAgaGFzOmE9PnRydWUgICAgICAgLyogd2hlbiBhc2tlZCwgdGhlIFByb3h5IGNsYWltcyBpdCBoYXMgYW55IHByb3BlcnR5ICovCn0pOwoKd2l0aChuaWdodG1hcmUpIHsKIKCgoHVoLW9oOwogoKCgdGhlVHJ1dGggPSBUaGlzICogaXMgKiB2YWxpZCAqIEphdmFTY3JpcHQgKiBub3c7CiCgoKBhcmUoeW91KShzZXJpb3VzKT8gYW5zd2VyOiBZRVM7CiCgoKBvaCwgY3JhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhLS0KfQoKY29uc29sZS5sb2coIlllcywgdGhpcyByZWFsbHkgcnVucyEiKTs=">
 </iframe>
 </div>
 <div class="split">
@@ -268,7 +280,7 @@ li { padding-bottom: 10px; }
 <div class="slide">
 <h1>Applications: binary literal</h1>
 <div class="split">
-<iframe height=600 width=100% src="repl.html?16#bGV0IGJpbmFyeUxpdGVyYWwgPSBuZXcgUHJveHkoe30sIHsKICAgIGdldDogKG9iaiwgbmFtZSkgPT4gewogICAgICAgIGlmKG5hbWUubGVuZ3RoICYmIG5hbWUubWF0Y2goL15iWzAxXSskLykpIHsKICAgICAgICAgICAgcmV0dXJuIHBhcnNlSW50KG5hbWUuc3Vic3RyKDEpLCAyKQogICAgICAgIH0gZWxzZSB7IHJldHVybiBldmFsKG5hbWUpOyB9CiAgICB9LAogICAgaGFzOiAob2JqLCBuYW1lKT0+KG5hbWUubGVuZ3RoICYmICEhL15iWzAxXSskLy5leGVjKG5hbWUpKQp9KQoKd2l0aChiaW5hcnlMaXRlcmFsKSB7CiAgICBjb25zb2xlLmxvZyhiMTAwMSArIGIwMTEwKTsKICAgIGNvbnNvbGUubG9nKGIxMTAwMTEwMCAmIGIwMDAwMTExMSk7CiAgICBjb25zb2xlLmxvZyhiMTExMTExIF4gYjEwMTAxMCk7Cn0=">
+<iframe src="repl.html?16#bGV0IGJpbmFyeUxpdGVyYWwgPSBuZXcgUHJveHkoe30sIHsKICAgIGdldDogKG9iaiwgbmFtZSkgPT4gewogICAgICAgIGlmKG5hbWUubGVuZ3RoICYmIG5hbWUubWF0Y2goL15iWzAxXSskLykpIHsKICAgICAgICAgICAgcmV0dXJuIHBhcnNlSW50KG5hbWUuc3Vic3RyKDEpLCAyKQogICAgICAgIH0gZWxzZSB7IHJldHVybiBldmFsKG5hbWUpOyB9CiAgICB9LAogICAgaGFzOiAob2JqLCBuYW1lKT0+KG5hbWUubGVuZ3RoICYmICEhL15iWzAxXSskLy5leGVjKG5hbWUpKQp9KQoKd2l0aChiaW5hcnlMaXRlcmFsKSB7CiAgICBjb25zb2xlLmxvZyhiMTAwMSArIGIwMTEwKTsKICAgIGNvbnNvbGUubG9nKGIxMTAwMTEwMCAmIGIwMDAwMTExMSk7CiAgICBjb25zb2xlLmxvZyhiMTExMTExIF4gYjEwMTAxMCk7Cn0=">
 </iframe>
 </div>
 <div class="split">
@@ -279,9 +291,30 @@ li { padding-bottom: 10px; }
 </div>
 
 <div class="slide">
-<h1>Applications: variables with strict types!!</h1>
-<iframe height=600 width=100% src="repl.html?16#bGV0IHR5cGVzID0gbmV3IFByb3h5KE9iamVjdC5jcmVhdGUobnVsbCksewogIHNldDogKG8sbix2KT0+ewogICAgbGV0IFtfLHR5cGUsbmFtZV0gPSBuLm1hdGNoKC8oW14kXSspXCRcJCguKykkLykgfHwgW107CiAgICBpZighKG5hbWUgaW4gbykpIHsgb1tuYW1lXSA9IHsgdHlwZTp0eXBlIH07IH0KICAgIGVsc2UgaWYob1tuYW1lXS50eXBlICE9PSB0eXBlKSB7IHRocm93IG5ldyBFcnJvcihgJHtuYW1lfSBjYW5ub3QgYmUgZ2l2ZW4gdHlwZSAke3R5cGV9OyBhbHJlYWR5IGRlZmluZWQgd2l0aCB0eXBlICR7b1tuYW1lXS50eXBlfWApIH0KICAgIG5hbWUgPSBuYW1lIHx8IG47CiAgICBpZih0eXBlb2YgdiA9PSBvW25hbWVdLnR5cGUpIHsgb1tuYW1lXS52YWx1ZSA9IHY7IH0KICAgIGVsc2UgeyB0aHJvdyBuZXcgRXJyb3IoYEV4cGVjdGVkIHR5cGUgJHtvW25hbWVdLnR5cGV9IGZvciAke25hbWV9OyByZWNlaXZlZCAke3R5cGVvZiB2fSBpbnN0ZWFkLmApOyB9CiAgfSwKICBnZXQ6IChvLG4pPT57IHJldHVybiBvW25dICYmIG9bbl0udmFsdWUgfSwKICBoYXM6IChvLG4pPT4obi5tYXRjaCgvKFteJF0rKVwkXCQoLispJC8pIHx8IG4gaW4gbykKfSk7Cgp3aXRoKHR5cGVzKSB7CiCgoKBudW1iZXIkJGkgPSAwOwogICAgd2hpbGUoaSA8IDUpIHsgY29uc29sZS5sb2coaSsrKTsgfQogICAgc3RyaW5nJCRuYW1lID0gImhlbGxvIjsKICAgIG5hbWUgPSA3Owp9Cgo=">
+<h1>Applications: PHP-like barewords</h1>
+<div class="split">
+<iframe src="repl.html#bGV0IGJhcmV3b3JkcyA9IG5ldyBQcm94eSh7fSwgewogICAgZ2V0OiAob2JqLCBuYW1lKSA9PiBuYW1lLAogICAgc2V0OiAob2JqLCBuYW1lLCB2YWx1ZSkgPT4gZXZhbChuYW1lICsgIj0iICsgdmFsdWUpLAogICAgaGFzOiAob2JqLCBuYW1lKT0+ewogICAgICAgIHJldHVybiBldmFsKCJ0eXBlb2YgIituYW1lKSA9PSAidW5kZWZpbmVkIjsKICAgIH0KfSkKCndpdGgoYmFyZXdvcmRzKSB7CiAgICBjb25zb2xlLmxvZyhoZWxsbyArIHdvcmxkKTsKICAgIGNvbnNvbGUubG9nKG5hbi5yZXBlYXQoMjApICsgYmF0bWFuKTsKICAgIGNvbnNvbGUubG9nKGFudGlkaXNlc3RhYmxpc2htZW50YXJpYW5pc20ubGVuZ3RoKTsKfQ==">
 </iframe>
+</div>
+<div class="split">
+<ul>
+  <li>PHP has a -- <i>ahem</i> -- feature where undefined variable identifiers resolve to a string with the identifier's content</li>
+</ul>
+</div>
+</div>
+
+<div class="slide">
+<h1>Applications: variables with strict types!!</h1>
+<iframe src="repl.html?16#bGV0IHR5cGVzID0gbmV3IFByb3h5KE9iamVjdC5jcmVhdGUobnVsbCksewogIHNldDogKG8sbix2KT0+ewogICAgbGV0IFtfLHR5cGUsbmFtZV0gPSBuLm1hdGNoKC8oW14kXSspXCRcJCguKykkLykgfHwgW107CiAgICBpZighKG5hbWUgaW4gbykpIHsgb1tuYW1lXSA9IHsgdHlwZTp0eXBlIH07IH0KICAgIGVsc2UgaWYob1tuYW1lXS50eXBlICE9PSB0eXBlKSB7IHRocm93IG5ldyBFcnJvcihgJHtuYW1lfSBjYW5ub3QgYmUgZ2l2ZW4gdHlwZSAke3R5cGV9OyBhbHJlYWR5IGRlZmluZWQgd2l0aCB0eXBlICR7b1tuYW1lXS50eXBlfWApIH0KICAgIG5hbWUgPSBuYW1lIHx8IG47CiAgICBpZih0eXBlb2YgdiA9PSBvW25hbWVdLnR5cGUpIHsgb1tuYW1lXS52YWx1ZSA9IHY7IH0KICAgIGVsc2UgeyB0aHJvdyBuZXcgRXJyb3IoYEV4cGVjdGVkIHR5cGUgJHtvW25hbWVdLnR5cGV9IGZvciAke25hbWV9OyByZWNlaXZlZCAke3R5cGVvZiB2fSBpbnN0ZWFkLmApOyB9CiAgfSwKICBnZXQ6IChvLG4pPT57IHJldHVybiBvW25dICYmIG9bbl0udmFsdWUgfSwKICBoYXM6IChvLG4pPT4obi5tYXRjaCgvKFteJF0rKVwkXCQoLispJC8pIHx8IG4gaW4gbykKfSk7Cgp3aXRoKHR5cGVzKSB7CiCgoKBudW1iZXIkJGkgPSAwOwogICAgd2hpbGUoaSA8IDUpIHsgY29uc29sZS5sb2coaSsrKTsgfQogICAgc3RyaW5nJCRuYW1lID0gImhlbGxvIjsKICAgIG5hbWUgPSA3Owp9Cgo=">
+</iframe>
+</div>
+
+<div class="slide center">
+<h1>Licenses</h1>
+<h2>Presentation: Structure, Text, Code, Images</h2>
+<div><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">"Anything is Possible! Unlocking the Nightmarish Power of JavaScript via `with` and `Proxy`"</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://apsillers.com/with-proxy" property="cc:attributionName" rel="cc:attributionURL">Andrew Sillers</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</div>
+<h2>Iframe-Embedded REPL</h2>
+<div>The Too-Simple REPL is licensed under the MIT/X11 License. (See the "About" button or source code for more information.) It is extremely lousy, easy to break, and should NOT be used for any kind of production environment. I'm already having nightmares about someone doing that. Don't.</div>
 </div>
 
 <script>
@@ -289,18 +322,23 @@ var slideIndex = +location.hash.substr(1) || 0;
 [...document.querySelectorAll(".slide")].forEach(s=>s.style.display="none");
 document.querySelector(".slide").style.display = "block";
 
-window.addEventListener("hashchange", function() { pageTo(+location.hash.substr(1) || slideIndex) });
+window.addEventListener("hashchange", function() {
+    var targetIndex = +location.hash.substr(1);
+    if(isNaN(targetIndex)) { tagetIndex = slideIndex; }
+    pageTo(targetIndex);
+});
 
 document.body.addEventListener("click", function(e) {
-    if(e.which == 1) { pageTo(slideIndex+1); }
+    if(e.which == 1) { location.hash = slideIndex+1; }
 });
 
 document.body.addEventListener("contextmenu", function(e) {
     e.preventDefault();
-    pageTo(slideIndex-1);
+    location.hash = slideIndex-1;
 });
 
 function pageTo(targetIndex) {
+    if(targetIndex < 0) { location.hash = ""; }
     slideIndex = targetIndex;
     [...document.querySelectorAll(".slide")].forEach((s,idx)=>s.style.display=(idx==targetIndex?"block":"none"));
 }
