@@ -1,0 +1,57 @@
+<html>
+<script>
+var internalEval;
+(function() {
+    
+})();
+
+(function() {
+var sessionId, sourceWindow;
+
+function ultraStringify(a) {
+    try {
+        var jsonResult = JSON.stringify(a);
+    } catch(e){}
+    if(jsonResult === undefined) {
+        try { return ""+a; }
+        catch(e) {
+            try { return String(a); }
+            catch(e) { return Object.prototype.toString.call(a); }
+        }
+    }
+    return jsonResult;
+}
+
+/* overwrite console.log to display to the in-page console */
+console.log = function(...args) {
+    sourceWindow.postMessage({ result: args.map(ultraStringify).join(''), sessionId: sessionId, isLog: true });
+}
+
+window.addEventListener("message", function(e) {
+    var result;
+    if(sessionId === undefined) {
+        sessionId = e.data.sessionId; sourceWindow = e.source;
+        var globalEval = eval;
+        try {
+            result = globalEval("internalEval=x=>eval(x);undefined;"+e.data.command);
+        } catch(err) {
+            sourceWindow.postMessage({ result: err.toString(), sessionId: sessionId, isError: true }, "*");
+        }
+    }
+    else {
+        try {
+            result = internalEval(e.data.command);
+        } catch(err) {
+            sourceWindow.postMessage({ result: err.toString(), sessionId: sessionId, isError: true }, "*");
+        }
+    }
+
+    try {
+        sourceWindow.postMessage({ result: ultraStringify(result), sessionId: sessionId }, "*");
+    } catch(err) {
+        sourceWindow.postMessage({ result: err.toString(), sessionId: sessionId, isError: true }, "*");
+    }
+}, false);
+})();
+</script>
+</html>
