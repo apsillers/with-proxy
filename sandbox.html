@@ -1,57 +1,89 @@
 <html>
+<head><meta charset="utf-8"></head>
+<body>
+<!--
+THIS REPL MAY LEAK CREDENTIALS. DO NOT USE IN AN AUTHENTICATED CONTEXT. NOT FOR PRODUCTION USE!
+In practice, this means you must ensure sandbox.html and repl.html are served from different origins (different domain, port, and/or protocol).
+
+This file is part of Too-Simple REPL.
+Copyright 2019 Andrew Sillers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
 <script>
-var internalEval;
+var setInteralEval;
 (function() {
+    var sessionId, sourceWindow, internalEval;
+
+    setInternalEval = f=>internalEval=f;
     
-})();
-
-(function() {
-var sessionId, sourceWindow;
-
-function ultraStringify(a) {
-    try {
-        var jsonResult = JSON.stringify(a);
-    } catch(e){}
-    if(jsonResult === undefined) {
-        try { return ""+a; }
-        catch(e) {
-            try { return String(a); }
-            catch(e) { return Object.prototype.toString.call(a); }
-        }
-    }
-    return jsonResult;
-}
-
-/* overwrite console.log to display to the in-page console */
-console.log = function(...args) {
-    sourceWindow.postMessage({ result: args.map(ultraStringify).join(''), sessionId: sessionId, isLog: true });
-}
-
-window.addEventListener("message", function(e) {
-    var result;
-    if(sessionId === undefined) {
-        sessionId = e.data.sessionId; sourceWindow = e.source;
-        var globalEval = eval;
+    function ultraStringify(a) {
+        if(a instanceof RegExp) { try { return RegExp.prototype.toString.apply(a); } catch{} }
         try {
-            result = globalEval("internalEval=x=>eval(x);undefined;"+e.data.command);
-        } catch(err) {
-            sourceWindow.postMessage({ result: err.toString(), sessionId: sessionId, isError: true }, "*");
+            var jsonResult = JSON.stringify(a, (key,obj)=>typeof obj == "function"?"[Function]":obj);
+        } catch(e){}
+        if(jsonResult === undefined) {
+            try { return ""+a; }
+            catch(e) {
+                try { return String(a); }
+                catch(e) { return Object.prototype.toString.call(a); }
+            }
         }
-    }
-    else {
-        try {
-            result = internalEval(e.data.command);
-        } catch(err) {
-            sourceWindow.postMessage({ result: err.toString(), sessionId: sessionId, isError: true }, "*");
-        }
+        return jsonResult;
     }
 
-    try {
-        sourceWindow.postMessage({ result: ultraStringify(result), sessionId: sessionId }, "*");
-    } catch(err) {
-        sourceWindow.postMessage({ result: err.toString(), sessionId: sessionId, isError: true }, "*");
+    /* overwrite console.log to display to the in-page console */
+    console.log = function(...args) {
+        sourceWindow.postMessage({ result: args.map(ultraStringify).join(''), sessionId: sessionId, isLog: true }, "*");
     }
-}, false);
+
+    window.addEventListener("message", function(e) {
+        var result, error, hasError = false;
+        if(sessionId === undefined) {
+            sessionId = e.data.sessionId;
+            sourceWindow = e.source;
+            var globalEval = eval;
+            try {
+                result = globalEval("setInternalEval(x=>eval(x));delete setInternalEval;undefined;"+e.data.command);
+            } catch(err) {
+                hasError = true;
+                error = err;
+            }
+        }
+        else {
+            try {
+                result = internalEval(e.data.command);
+            } catch(err) {
+                hasError = true;
+                error = err;
+            }
+        }
+
+        if(!hasError) {
+            sourceWindow.postMessage({ result: ultraStringify(result), sessionId: sessionId }, "*");
+        } else {
+            sourceWindow.postMessage({ result: error.toString(), sessionId: sessionId, isError: true }, "*");
+        }
+    }, false);
+
+    window.parent.postMessage({init:true}, "*");
 })();
 </script>
+</body>
 </html>
