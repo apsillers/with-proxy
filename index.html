@@ -1,5 +1,7 @@
 <!--
-
+Copyright 2019 Andrew Sillers
+This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License
+http://creativecommons.org/licenses/by-sa/4.0/
 -->
 <html>
 <head>
@@ -34,7 +36,11 @@ iframe {
 <br/>
 <h3>Andrew Sillers</h3>
 <br/>
+<h3><a href="#">apsillers.com/with-proxy</a></h3>
+<br/>
 <small>Click/tap to continue; right-click or long-press to go back</small>
+<br/><br/>
+<small>License: CC BY-SA (presentation) / X11 (code)<br>See end slide for details.</small>
 </div>
 
 <div class="slide">
@@ -42,11 +48,12 @@ iframe {
 <ul>
   <li>A variable is, in language terms, a structure with at least two parts:</li>
   <ul>
-    <li>A name ("identifier")</li>
+    <li>A name ("variable identifier")</li>
     <li>A value</li>
     <li>Also, type and memory location, but JavaScript variables don't have those</li>
+    <ul><li>JS <em>values</em> have types; JS <em>variables</em> do not</li></ul>
   </ul>
-<li>Today, we're going to wreck JavaScript's ability to use variables!</li>
+<li>Today, we're going to <strong>wreck JavaScript's ability to use variables</strong>, and then bring it back <strong>"better" than "ever"!</strong></li>
 </ul>
 </div>
 
@@ -92,7 +99,8 @@ iframe {
     <li><code>alice["age"]</code></li>
   </ul>
   <li>But this now causes <strong>transparent function execution</strong></li>
-  <li>The code that asks for alice.age can't tell the difference between a stored value and the getter-generated value</li>
+  <li>The code that asks for <code>alice.age</code> can't tell the difference between a stored value and a getter-generated value</li>
+  <li>Infinite possible values for the property <code>age</code></li>
 </ul>
 </div>
 </div>
@@ -105,6 +113,7 @@ iframe {
 </div>
 <div class="split">
 <ul>
+  <li>We can have infinite possible values for a property, but...</li>
   <li>What if we wanted INFINITE properties?</li>
   <li>How could you even populate infinite propeties with meaningful values?</li>
   <ul><li>That could take a long time to do manually</li></ul>
@@ -127,7 +136,8 @@ iframe {
   <br/>
   <li>Proxies let you define one master getter function for all properties</li>
   <ul><li>Runs all property access through a "trap" function</li></ul>
-  <li>While traditional getter lets a single property dynamically change value, Proxy's <code>get</code> can dynamically maps any property name onto a value</li>
+  <li>A traditional getter lets a single property dynamically compute its value</li>
+  <li>Proxy's <code>get</code> allows arbitrary mapping from property names to values</li>
 </ul>
 </div>
 </div>
@@ -141,13 +151,13 @@ iframe {
 
 <div class="slide">
 <h1>Interesting Proxy: properties can't start with "s"</h1>
-<iframe src="repl.html?18#bm9TID0gbmV3IFByb3h5KHt9LCB7CiCgoKCgoKCgZ2V0Oihpbm5lck9iaiwgcHJvcE5hbWUpID0+IHsKIKCgoKCgoKCgoKCgoKCgaWYocHJvcE5hbWUuc3RhcnRzV2l0aCgicyIpKQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gIkkgZG9uJ3QgbGlrZSBzLXdvcmRzIjsKIKCgoKCgoKCgoKCgoKCgZWxzZQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gaW5uZXJPYmpbcHJvcE5hbWVdOwogoKCgoKCgoKCgoKCgfQogoKCgoKCgoKB9KTsKCm5vUy5mb28gPSA1Owpub1Muc2hvb3QgPSA2Ow==">
+<iframe src="repl.html?18#bm9zID0gbmV3IFByb3h5KHt9LCB7CiCgoKCgoKCgZ2V0Oihpbm5lck9iaiwgcHJvcE5hbWUpID0+IHsKIKCgoKCgoKCgoKCgoKCgaWYocHJvcE5hbWUuc3RhcnRzV2l0aCgicyIpKQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gIkkgZG9uJ3QgbGlrZSBzLXdvcmRzIjsKIKCgoKCgoKCgoKCgoKCgZWxzZQogoKCgoKCgoKCgoKCgoKCgoKByZXR1cm4gaW5uZXJPYmpbcHJvcE5hbWVdOwogoKCgoKCgoKCgoKCgfQogoKCgoKCgoKB9KTsKCm5vcy5mb28gPSA1Owpub3Muc2hvb3QgPSA2Ow==">
 </iframe>
 </div>
 
 <div class="slide">
 <h1>Interesting Proxy: <code>eval</code> all the things</h1>
-<iframe src="repl.html?18#ZXZQcm94eSA9IG5ldyBQcm94eSh7fSwgewogoKCgoKCgoKCgoKBnZXQ6IGZ1bmN0aW9uKGlubmVyT2JqLCBwcm9wTmFtZSkgewogoKCgoKCgoKCgoKCgoKCgoKCgcmV0dXJuIGV2YWwocHJvcE5hbWUpOwogoKCgoKCgoKCgoKB9CiCgoKCgoKCgoKB9KTsKLyoKZXZQcm94eS53aW5kb3cKZXZQcm94eVsiMSsxIl0KZXZQcm94eVsiZm9yKGk9MDtpPDM7aSsrKWNvbnNvbGUubG9nKGkpIl0KZXZQcm94eS5ldlByb3h5CmV2UHJveHkuZXZQcm94eS5ldlByb3h5LmV2UHJveHkuZXZQcm94eS5ldlByb3h5LmV2UHJveHkKKi8=">
+<iframe src="repl.html?18#ZXZwcm94eSA9IG5ldyBQcm94eSh7fSwgewogoKCgoKCgoKCgoKBnZXQ6IGZ1bmN0aW9uKGlubmVyT2JqLCBwcm9wTmFtZSkgewogoKCgoKCgoKCgoKCgoKCgoKCgcmV0dXJuIGV2YWwocHJvcE5hbWUpOwogoKCgoKCgoKCgoKB9CiCgoKCgoKCgoKB9KTsKLyoKZXZwcm94eS53aW5kb3cKZXZwcm94eVsiMSsyIl0KZXZwcm94eVsiZm9yKGk9MDtpPDM7aSsrKWNvbnNvbGUubG9nKGkpIl0KZXZwcm94eS5ldnByb3h5CmV2cHJveHkuZXZwcm94eS5ldnByb3h5LmV2cHJveHkuZXZwcm94eS5ldnByb3h5LmV2cHJveHkKKi8=">
 </iframe>
 </div>
 
@@ -204,10 +214,8 @@ iframe {
 <h1>Let's review</h1>
 <ol>
 <li>A variable is data structure with a name and a value.</li>
-<ul>
 <li>A scope is a set of variables, plus a parent scope</li>
-</ul>
-<li>This parent-child relationship makes up the scope chain.</li>
+<ul><li>This parent-child relationship makes up the scope chain.</li></ul>
 <li>Blocks have scopes. <small>(Functions do too. Not important right now.)</small></li>
 <li>We create a variable in a scope via variable definitions like <code>let foo</code></li>
 <li>When our code uses any variable identifier, the JS engine tries to find some a matching-named variable somewhere in the scope chain</li>
@@ -285,6 +293,7 @@ iframe {
 </div>
 <div class="split">
 <ul>
+  <li>JavaScript already has hex literals like <code>0x1A0F</code></li>
   <li>We could make a binary literal of the form <code>b[01]+</code></li>
 </ul>
 </div>
@@ -293,13 +302,13 @@ iframe {
 <div class="slide">
 <h1>Applications: PHP-like bare strings</h1>
 <div class="split">
-<iframe src="repl.html#bGV0IGJhcmV3b3JkcyA9IG5ldyBQcm94eSh7fSwgewogICAgZ2V0OiAob2JqLCBuYW1lKSA9PiBuYW1lLAogICAgc2V0OiAob2JqLCBuYW1lLCB2YWx1ZSkgPT4gZXZhbChuYW1lICsgIj0iICsgdmFsdWUpLAogICAgaGFzOiAob2JqLCBuYW1lKT0+ewogICAgICAgIHJldHVybiBldmFsKCJ0eXBlb2YgIituYW1lKSA9PSAidW5kZWZpbmVkIjsKICAgIH0KfSk7Cgp3aXRoKGJhcmV3b3JkcykgewogICAgY29uc29sZS5sb2coaGVsbG8gKyB3b3JsZCk7CiAgICBjb25zb2xlLmxvZyhuYW4ucmVwZWF0KDIwKSArIGJhdG1hbik7CiAgICBjb25zb2xlLmxvZyhhbnRpZGlzZXN0YWJsaXNobWVudGFyaWFuaXNtLmxlbmd0aCk7Cn0=">
+<iframe src="repl.html#bGV0IGJhcmV3b3JkcyA9IG5ldyBQcm94eSh7fSwgewogICAgZ2V0OiAob2JqLCBuYW1lKSA9PiBuYW1lLAogICAgc2V0OiAob2JqLCBuYW1lLCB2YWx1ZSkgPT4gZXZhbChuYW1lICsgIj0iICsgdmFsdWUpLAogICAgaGFzOiAob2JqLCBuYW1lKT0+ewogICAgICAgIHJldHVybiBldmFsKCJ0eXBlb2YgIituYW1lKSA9PSAidW5kZWZpbmVkIjsKICAgIH0KfSk7Cgp3aXRoKGJhcmV3b3JkcykgewogICAgY29uc29sZS5sb2coaGVsbG8gKyB3b3JsZCk7CiAgICBjb25zb2xlLmxvZyhuYW5bcmVwZWF0XSgyMCkgKyBiYXRtYW4pOwogICAgY29uc29sZS5sb2coYW50aWRpc2VzdGFibGlzaG1lbnRhcmlhbmlzbS5sZW5ndGgpOwp9">
 </iframe>
 </div>
 <div class="split">
 <ul>
   <li>PHP has an "interesting" "feature" where you ahve have "quoteless" bare-strings</li>
-  <li> i.e., undefined variable identifiers resolve to a string with the identifier's content</li>
+  <li> i.e., variable identifiers that would resolve to <code>undefined</code> instead resolve to a string with the identifier's content</li>
   <li>I thought JavaScript had a monopoly on all the worst idiosyncrasies! We must implement this behavior in JS as well</li>
 </ul>
 </div>
@@ -314,6 +323,8 @@ iframe {
 <div class="slide center">
 <h1>The End</h1>
 <div>Click onward for licensing information</div>
+<br>
+<h3><a href="#">apsillers.com/with-proxy</a></h3>
 </div>
 
 <div class="slide center">
